@@ -1,0 +1,3 @@
+== Banking 2.0
+
+Banking App to monitor your banking transactions
