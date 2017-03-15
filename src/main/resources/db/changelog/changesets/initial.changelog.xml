@@ -18,5 +18,31 @@
 		</rollback>
 		<comment>table to store account information</comment>
 	</changeSet>
+	
+		<changeSet id="2" author="sebastian">
+		<createTable tableName="transaction">
+			<column name="id" type="int" autoIncrement="true" remarks="primary key">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			
+			
+			
+			
+			
+		</createTable>
+		<addForeignKeyConstraint baseColumnNames="person_id"
+            baseTableName="transaction"
+            constraintName="fk_transaction_account"
+            deferrable="true"
+            initiallyDeferred="true"
+            onDelete="CASCADE"
+            onUpdate="RESTRICT"
+            referencedColumnNames="id"
+            referencedTableName="account"/>
+		<rollback>
+			<dropTable tableName="transaction" />
+		</rollback>
+		<comment>table to store bank transactions</comment>
+	</changeSet>
 
 </databaseChangeLog>

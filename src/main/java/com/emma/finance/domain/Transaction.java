@@ -5,6 +5,7 @@ import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,8 +19,8 @@ public class Transaction {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 	
-	@ManyToOne(optional=false)
-    @JoinColumn(name="account_fk",referencedColumnName="account_fk")
+	@ManyToOne(optional=false,fetch=FetchType.LAZY)
+    @JoinColumn(name="account_fk")
 	private Account account;
 	
 	//Wertstellung
