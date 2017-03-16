@@ -24,13 +24,17 @@
 			<column name="id" type="int" autoIncrement="true" remarks="primary key">
 				<constraints primaryKey="true" nullable="false" />
 			</column>
-			
-			
-			
-			
-			
+			<column name="account_fk" type="int" remarks="Account foreign key" />
+			<column name="value_date" type="date" remarks="Value date" />
+			<column name="booking_date" type="date" remarks="Buchungstag, Belegdatum" />
+			<column name="amount" type="numeric(6,2)" remarks="Amount" />
+			<column name="payment_details" type="varchar(70)" remarks="Verwendungszweck" />
+			<column name="transaction_type" type="varchar(50)" remarks="Buchungstext" />
+			<column name="recipient_initiator" type="varchar(50)" remarks="Auftraggeber/Beguenstigter" />
+			<column name="account_number" type="varchar(30)" remarks="IBAN, Kontonummer" />
+			<column name="bank_code" type="varchar(50)" remarks="Banking code BLZr" />
 		</createTable>
-		<addForeignKeyConstraint baseColumnNames="person_id"
+		<addForeignKeyConstraint baseColumnNames="account_fk"
             baseTableName="transaction"
             constraintName="fk_transaction_account"
             deferrable="true"

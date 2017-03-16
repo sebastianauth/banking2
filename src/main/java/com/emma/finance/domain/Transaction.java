@@ -43,95 +43,15 @@ public class Transaction {
 	private String transactionType;
 	
 	//Auftraggeber/Beguenstigter
-	@Column
+	@Column(name="recipient_initiator")
 	private String recipientInitiator;
 	
 	//IBAN, Kontonummer
 	@Column(name="account_number")
 	private String accountNumber;
 	
-	@Column(name="BLZ")
+	@Column(name="bank_code")
 	private String bankCode;
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public Account getAccount() {
-		return account;
-	}
-
-	public void setAccount(Account account) {
-		this.account = account;
-	}
-
-	public Date getValueDate() {
-		return valueDate;
-	}
-
-	public void setValueDate(Date valueDate) {
-		this.valueDate = valueDate;
-	}
-
-	public Date getBookingDate() {
-		return bookingDate;
-	}
-
-	public void setBookingDate(Date bookingDate) {
-		this.bookingDate = bookingDate;
-	}
-
-	public BigDecimal getAmount() {
-		return amount;
-	}
-
-	public void setAmount(BigDecimal amount) {
-		this.amount = amount;
-	}
-
-	public String getPaymentDetails() {
-		return paymentDetails;
-	}
-
-	public void setPaymentDetails(String paymentDetails) {
-		this.paymentDetails = paymentDetails;
-	}
-
-	public String getTransactionType() {
-		return transactionType;
-	}
-
-	public void setTransactionType(String transactionType) {
-		this.transactionType = transactionType;
-	}
-
-	public String getRecipientInitiator() {
-		return recipientInitiator;
-	}
-
-	public void setRecipientInitiator(String recipientInitiator) {
-		this.recipientInitiator = recipientInitiator;
-	}
-
-	public String getAccountNumber() {
-		return accountNumber;
-	}
-
-	public void setAccountNumber(String accountNumber) {
-		this.accountNumber = accountNumber;
-	}
-
-	public String getBankCode() {
-		return bankCode;
-	}
-
-	public void setBankCode(String bankCode) {
-		this.bankCode = bankCode;
-	}
 
 	@Override
 	public int hashCode() {
