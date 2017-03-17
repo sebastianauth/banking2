@@ -11,6 +11,7 @@
 			<column name="account_number" type="varchar(100)" remarks="iban or credit card number">
 				<constraints nullable="false" />
 			</column>
+			<column name="account_type" type="varchar(20)" remarks="Type: Credit Card or Giro" />
 			<column name="description" type="varchar(150)" remarks="some description" />
 		</createTable>
 		<rollback>
@@ -45,6 +46,7 @@
             referencedTableName="account"/>
 		<rollback>
 			<dropTable tableName="transaction" />
+			<dropForeignKeyConstraint baseTableName="transaction" constraintName="fk_transaction_account"/>
 		</rollback>
 		<comment>table to store bank transactions</comment>
 	</changeSet>

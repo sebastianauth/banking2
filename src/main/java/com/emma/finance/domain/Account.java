@@ -20,6 +20,9 @@ public class Account {
 	
 	@Column
 	private String description;
+	
+	@Column
+	private AccountType accountType;
 
 	@Override
 	public String toString() {
