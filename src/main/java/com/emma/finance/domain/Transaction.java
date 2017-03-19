@@ -4,19 +4,27 @@ import java.math.BigDecimal;
 import java.sql.Date;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
-public class Transaction {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="account_type")
+@Table(name="Transaction")
+public abstract class Transaction {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="id", updatable = false, nullable = false)
 	private Integer id;
 	
 	@ManyToOne(optional=false,fetch=FetchType.LAZY)
@@ -37,21 +45,6 @@ public class Transaction {
 	//Verwendungszweck, Beschreibung
 	@Column(name="payment_details")
 	private String paymentDetails;
-	
-	//Buchungstext
-	@Column(name="transaction_type")
-	private String transactionType;
-	
-	//Auftraggeber/Beguenstigter
-	@Column(name="recipient_initiator")
-	private String recipientInitiator;
-	
-	//IBAN, Kontonummer
-	@Column(name="account_number")
-	private String accountNumber;
-	
-	@Column(name="bank_code")
-	private String bankCode;
 
 	@Override
 	public int hashCode() {
