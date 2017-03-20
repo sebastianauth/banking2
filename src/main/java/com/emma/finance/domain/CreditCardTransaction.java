@@ -11,7 +11,7 @@ import javax.persistence.Entity;
 public class CreditCardTransaction extends Transaction {
 	
 	//Urspruenglicher Betrag
-	@Column(name="orininal_amount")
+	@Column(name="original_amount")
 	private BigDecimal originalAmount;
 
 }

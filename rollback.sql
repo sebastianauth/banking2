@@ -2,7 +2,7 @@
 -- SQL to roll back currently unexecuted changes
 -- *********************************************************************
 -- Change Log: classpath:/db/changelog/db.changelog-master.xml
--- Ran at: 17.03.17 21:47
+-- Ran at: 20.03.17 22:24
 -- Against: banking_db_user@jdbc:postgresql://localhost:5432/banking_dev
 -- Liquibase version: 3.5.3
 -- *********************************************************************
@@ -16,7 +16,7 @@ DELETE FROM banking.databasechangeloglock;
 INSERT INTO banking.databasechangeloglock (ID, LOCKED) VALUES (1, FALSE);
 
 -- Lock Database
-UPDATE banking.databasechangeloglock SET LOCKED = TRUE, LOCKEDBY = 'sebastian-pc (192.168.230.1)', LOCKGRANTED = '2017-03-17 21:47:45.991' WHERE ID = 1 AND LOCKED = FALSE;
+UPDATE banking.databasechangeloglock SET LOCKED = TRUE, LOCKEDBY = 'sebastian-pc (192.168.230.1)', LOCKGRANTED = '2017-03-20 22:24:44.071' WHERE ID = 1 AND LOCKED = FALSE;
 
 -- Create Database Change Log Table
 CREATE TABLE banking.databasechangelog (ID VARCHAR(255) NOT NULL, AUTHOR VARCHAR(255) NOT NULL, FILENAME VARCHAR(255) NOT NULL, DATEEXECUTED TIMESTAMP WITHOUT TIME ZONE NOT NULL, ORDEREXECUTED INT NOT NULL, EXECTYPE VARCHAR(10) NOT NULL, MD5SUM VARCHAR(35), DESCRIPTION VARCHAR(255), COMMENTS VARCHAR(255), TAG VARCHAR(255), LIQUIBASE VARCHAR(20), CONTEXTS VARCHAR(255), LABELS VARCHAR(255), DEPLOYMENT_ID VARCHAR(10));

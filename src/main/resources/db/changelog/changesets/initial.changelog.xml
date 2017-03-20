@@ -5,14 +5,14 @@
 
 	<changeSet id="1" author="sebastian">
 		<createTable tableName="account">
-			<column name="id" type="int" autoIncrement="true" remarks="primary key">
+			<column name="id" type="integer" autoIncrement="true" remarks="primary key">
 				<constraints primaryKey="true" nullable="false" />
 			</column>
 			<column name="account_number" type="varchar(100)" remarks="iban or credit card number">
 				<constraints nullable="false" />
 			</column>
-			<column name="account_type" type="varchar(20)" remarks="Type: Credit Card or Giro" />
-			<column name="description" type="varchar(150)" remarks="some description" />
+			<column name="account_type" type="integer" remarks="Type: Giro or Credit Card" />
+			<column name="description" type="varchar(200)" remarks="some description" />
 		</createTable>
 		<rollback>
 			<dropTable tableName="account" />
@@ -25,14 +25,18 @@
 			<column name="id" type="int" autoIncrement="true" remarks="primary key">
 				<constraints primaryKey="true" nullable="false" />
 			</column>
-			<column name="account_fk" type="int" remarks="Account foreign key" />
+			<column name="account_type" type="varchar(10)" remarks="Account type Giro or Credit Card" />
+			<column name="account_fk" type="int" remarks="Account foreign key">
+				<constraints nullable="false" foreignKeyName="fk_account_transaction" />
+			</column>
 			<column name="value_date" type="date" remarks="Value date" />
 			<column name="booking_date" type="date" remarks="Buchungstag, Belegdatum" />
-			<column name="amount" type="numeric(6,2)" remarks="Amount" />
+			<column name="amount" type="numeric(19,2)" remarks="Amount/Betrag" />
+			<column name="original_amount" type="numeric(19,2)" remarks="Urspruenglicher Betrag Foreign currencies" />
 			<column name="payment_details" type="varchar(70)" remarks="Verwendungszweck" />
 			<column name="transaction_type" type="varchar(50)" remarks="Buchungstext" />
 			<column name="recipient_initiator" type="varchar(50)" remarks="Auftraggeber/Beguenstigter" />
-			<column name="account_number" type="varchar(30)" remarks="IBAN, Kontonummer" />
+			<column name="account_number" type="varchar(50)" remarks="IBAN, Kontonummer" />
 			<column name="bank_code" type="varchar(50)" remarks="Banking code BLZr" />
 		</createTable>
 		<addForeignKeyConstraint baseColumnNames="account_fk"
