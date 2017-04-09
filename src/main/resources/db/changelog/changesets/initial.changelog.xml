@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-	<changeSet id="1" author="sebastian">
+	<changeSet id="add_account_table" author="sebastian">
 		<createTable tableName="account">
 			<column name="id" type="integer" autoIncrement="true" remarks="primary key">
 				<constraints primaryKey="true" nullable="false" />
@@ -20,8 +20,8 @@
 		<comment>table to store account information</comment>
 	</changeSet>
 	
-		<changeSet id="2" author="sebastian">
-		<createTable tableName="transaction_staging">
+	<changeSet id="add_transaction_table" author="sebastian">
+		<createTable tableName="transaction">
 			<column name="id" type="int" autoIncrement="true" remarks="primary key">
 				<constraints primaryKey="true" nullable="false" />
 			</column>
@@ -57,6 +57,19 @@
 			<dropForeignKeyConstraint baseTableName="transaction" constraintName="fk_transaction_account"/>
 		</rollback>
 		<comment>table to store bank transactions</comment>
+	</changeSet>
+	
+	<changeSet author="sebastian" id="add_unique_contraint" >
+	    <addUniqueConstraint
+	            columnNames="account_fk, value_date, booking_date, amount, paymentDetails"
+	            constraintName="constr_transaction"
+	            deferrable="true"
+	            disabled="true"
+	            initiallyDeferred="true"
+	            tableName="transaction" />
+        <rollback>
+        	<dropUniqueConstraint tableName="transaction"/>
+        </rollback>
 	</changeSet>
 
 </databaseChangeLog>

@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 
 @Entity
 @DiscriminatorValue("CC")
-public class CreditCardTransactionStaging extends TransactionStaging {
+public class CreditCardTransaction extends Transaction {
 	
 	//Umsatz abgerechnet
 	@Column(name="ta_cleared")
