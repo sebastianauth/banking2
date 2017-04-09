@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 
 @Entity
 @DiscriminatorValue("GIRO")
-public class GiroTransaction extends Transaction {
+public class GiroTransactionStaging extends TransactionStaging {
 	
 	//Buchungstext
 	@Column(name="transaction_type")
@@ -23,5 +23,17 @@ public class GiroTransaction extends Transaction {
 	
 	@Column(name="bank_code")
 	private String bankCode;
+	
+	//Gläubiger-ID
+	@Column(name="creditor_id")
+	private String creditorId;
+	
+	//Mandatsreferenz
+	@Column(name="mandate")
+	private String mandate;
+	
+	//Kundenreferenz
+	@Column(name="customer")
+	private String customer;
 
 }

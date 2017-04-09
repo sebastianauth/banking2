@@ -21,7 +21,7 @@
 	</changeSet>
 	
 		<changeSet id="2" author="sebastian">
-		<createTable tableName="transaction">
+		<createTable tableName="transaction_staging">
 			<column name="id" type="int" autoIncrement="true" remarks="primary key">
 				<constraints primaryKey="true" nullable="false" />
 			</column>
@@ -37,7 +37,11 @@
 			<column name="transaction_type" type="varchar(50)" remarks="Buchungstext" />
 			<column name="recipient_initiator" type="varchar(50)" remarks="Auftraggeber/Beguenstigter" />
 			<column name="account_number" type="varchar(50)" remarks="IBAN, Kontonummer" />
-			<column name="bank_code" type="varchar(50)" remarks="Banking code BLZr" />
+			<column name="bank_code" type="varchar(50)" remarks="Banking code BLZ" />
+			<column name="creditor_id" type="varchar(50)" remarks="Gläubiger-ID" />
+			<column name="mandate" type="varchar(50)" remarks="Mandatsreferenz" />
+			<column name="customer" type="varchar(50)" remarks="Kundenreferenz" />
+			<column name="ta_cleared" type="boolean" remarks="Umsatz abgerechnet und nicht im Saldo enthalten" />
 		</createTable>
 		<addForeignKeyConstraint baseColumnNames="account_fk"
             baseTableName="transaction"
