@@ -25,7 +25,7 @@
 			<column name="id" type="int" autoIncrement="true" remarks="primary key">
 				<constraints primaryKey="true" nullable="false" />
 			</column>
-			<column name="account_type" type="varchar(10)" remarks="Account type Giro or Credit Card" />
+			<column name="account_type" type="varchar(4)" remarks="Account type Giro or Credit Card" />
 			<column name="account_fk" type="int" remarks="Account foreign key">
 				<constraints nullable="false" foreignKeyName="fk_account_transaction" />
 			</column>
@@ -33,7 +33,7 @@
 			<column name="booking_date" type="date" remarks="Buchungstag, Belegdatum" />
 			<column name="amount" type="numeric(19,2)" remarks="Amount/Betrag" />
 			<column name="original_amount" type="numeric(19,2)" remarks="Urspruenglicher Betrag Foreign currencies" />
-			<column name="payment_details" type="varchar(70)" remarks="Verwendungszweck" />
+			<column name="payment_details" type="varchar(100)" remarks="Verwendungszweck" />
 			<column name="transaction_type" type="varchar(50)" remarks="Buchungstext" />
 			<column name="recipient_initiator" type="varchar(50)" remarks="Auftraggeber/Beguenstigter" />
 			<column name="account_number" type="varchar(50)" remarks="IBAN, Kontonummer" />

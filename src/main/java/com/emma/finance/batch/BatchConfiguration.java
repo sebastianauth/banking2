@@ -10,7 +10,8 @@ import org.springframework.batch.core.configuration.annotation.StepBuilderFactor
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.item.ParseException;
 import org.springframework.batch.item.UnexpectedInputException;
-import org.springframework.batch.item.database.JpaItemWriter;
+import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider;
+import org.springframework.batch.item.database.JdbcBatchItemWriter;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
@@ -48,18 +49,18 @@ public class BatchConfiguration {
         
         //LineTokenizer
         DelimitedLineTokenizer tokenizer = new DelimitedLineTokenizer();
+        
         tokenizer.setNames(new String[] { "Buchungstag", "Wertstellung", "Buchungstext", 
         		"Auftraggeber", "Verwendungszweck", "Kontonummer", "BLZ", "Betrag", 
         		"Glaeubiger-ID", "Mandatsreferenz", "Kundenreferenz" });
         tokenizer.setDelimiter(";");
         tokenizer.setQuoteCharacter(DelimitedLineTokenizer.DEFAULT_QUOTE_CHARACTER);
+        tokenizer.setStrict(false);
         
         lineMapper.setLineTokenizer(tokenizer);
         lineMapper.setFieldSetMapper(new GiroFieldSetMapper());
         
         itemReader.setLineMapper(lineMapper);
-//        itemReader.open(new ExecutionContext());
-//        GiroTransaction transaction = itemReader.read();
         
         return itemReader;
     }
@@ -69,24 +70,20 @@ public class BatchConfiguration {
         return new GiroItemProcessor();
     }
 
-//    @Bean
-//    public JdbcBatchItemWriter<TransactionStaging> writer() {
-//        JdbcBatchItemWriter<TransactionStaging> writer = new JdbcBatchItemWriter<TransactionStaging>();
-//        writer.setItemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<Person>());
-//        writer.setSql("INSERT INTO people (first_name, last_name) VALUES (:firstName, :lastName)");
-//        writer.setDataSource(dataSource);
-//        return writer;
-//    }
-    
     @Bean
-    public JpaItemWriter<GiroTransaction> writer(){
-    	
-		return null;
-    	
+    public JdbcBatchItemWriter<GiroTransaction> writer() {
+        JdbcBatchItemWriter<GiroTransaction> writer = new JdbcBatchItemWriter<GiroTransaction>();
+        writer.setItemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<GiroTransaction>());
+        
+        String sql = "INSERT INTO fin_transaction (account_type, account_fk, value_date, booking_date, amount, payment_details, "
+        		+ "transaction_type, recipient_initiator, account_number, bank_code, mandate, creditor_id, customer) "
+        		+ "VALUES ('GIRO', 1, :valueDate, :bookingDate, :amount, :paymentDetails, :transactionType, "
+        		+ ":recipientInitiator, :accountNumber, :bankCode, :mandate, :creditorId, :customer)";
+        
+        writer.setSql(sql);
+        writer.setDataSource(dataSource);
+        return writer;
     }
-    
-    
-    
     // end::readerwriterprocessor[]
 
     // tag::jobstep[]
