@@ -19,8 +19,8 @@ import javax.persistence.Table;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="account_type")
-@Table(name="transaction")
-public abstract class Transaction {
+@Table(name="fin_transaction")
+public abstract class FinancialTransaction {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -156,7 +156,7 @@ public abstract class Transaction {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Transaction other = (Transaction) obj;
+		FinancialTransaction other = (FinancialTransaction) obj;
 		if (account == null) {
 			if (other.account != null)
 				return false;

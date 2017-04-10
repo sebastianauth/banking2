@@ -12,7 +12,6 @@ public class GiroItemProcessor implements ItemProcessor<GiroTransaction, GiroTra
 	
 	private static final Logger log = LoggerFactory.getLogger(GiroItemProcessor.class);
 
-
 	@Override
 	public GiroTransaction process(GiroTransaction item) throws Exception {
 		

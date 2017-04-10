@@ -21,7 +21,7 @@
 	</changeSet>
 	
 	<changeSet id="add_transaction_table" author="sebastian">
-		<createTable tableName="transaction">
+		<createTable tableName="fin_transaction">
 			<column name="id" type="int" autoIncrement="true" remarks="primary key">
 				<constraints primaryKey="true" nullable="false" />
 			</column>
@@ -44,7 +44,7 @@
 			<column name="ta_cleared" type="boolean" remarks="Umsatz abgerechnet und nicht im Saldo enthalten" />
 		</createTable>
 		<addForeignKeyConstraint baseColumnNames="account_fk"
-            baseTableName="transaction"
+            baseTableName="fin_transaction"
             constraintName="fk_transaction_account"
             deferrable="true"
             initiallyDeferred="true"
@@ -54,30 +54,40 @@
             referencedTableName="account"/>
 		<rollback>
 			<dropTable tableName="transaction" />
-			<dropForeignKeyConstraint baseTableName="transaction" constraintName="fk_transaction_account"/>
+			<dropForeignKeyConstraint  baseTableName="fin_transaction" constraintName="fk_transaction_account"/>
 		</rollback>
 		<comment>table to store bank transactions</comment>
 	</changeSet>
 	
 	<changeSet author="sebastian" id="add_unique_contraint" >
 	    <addUniqueConstraint
-	            columnNames="account_fk, value_date, booking_date, amount, paymentDetails"
-	            constraintName="constr_transaction"
-	            deferrable="true"
-	            disabled="true"
-	            initiallyDeferred="true"
-	            tableName="transaction" />
+	            columnNames="account_fk, value_date, booking_date, amount, payment_details"
+	            constraintName="uq_transaction"
+	            tableName="fin_transaction" />
         <rollback>
-        	<dropUniqueConstraint tableName="transaction"/>
+        	<dropUniqueConstraint tableName="fin_transaction" constraintName="uk_transaction"/>
         </rollback>
+        <comment>unique contraint account_fk, value_date, booking_date, amount, payment_details</comment>
 	</changeSet>
-	
+ 
 	<changeSet author="sebastian" id="insert_account_data">
 	    <insert tableName="account">
 	        <column name="account_number" type="varchar(100)">DE90120300001019838471</column>
 	        <column name="account_type">1</column>
 			<column name="description" type="varchar(100)">Girokonto Julia und Sebastian</column>
 	    </insert>
+	   	<insert tableName="account">
+	        <column name="account_number" type="varchar(100)">DE82120300001001352937</column>
+	        <column name="account_type">1</column>
+			<column name="description" type="varchar(100)">Girokonto Sebastian</column>
+	    </insert>
+	   	<insert tableName="account">
+	        <column name="account_number" type="varchar(100)">4748********1319</column>
+	        <column name="account_type">2</column>
+			<column name="description" type="varchar(100)">Kreditkarte Sebastian</column>
+	    </insert>
+	    <rollback></rollback>
+        <comment>insert accounts</comment>
 	</changeSet>
 
 </databaseChangeLog>

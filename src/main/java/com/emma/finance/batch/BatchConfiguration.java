@@ -8,13 +8,10 @@ import org.springframework.batch.core.configuration.annotation.EnableBatchProces
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
-import org.springframework.batch.item.ExecutionContext;
 import org.springframework.batch.item.ParseException;
 import org.springframework.batch.item.UnexpectedInputException;
-import org.springframework.batch.item.database.JdbcBatchItemWriter;
 import org.springframework.batch.item.database.JpaItemWriter;
 import org.springframework.batch.item.file.FlatFileItemReader;
-import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +20,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 
 import com.emma.finance.domain.GiroTransaction;
-import com.emma.finance.domain.Transaction;
-
-import antlr.TokenStreamRewriteEngine;
 
 @Configuration
-//@EnableBatchProcessing
+@EnableBatchProcessing
 public class BatchConfiguration {
 
     @Autowired
@@ -45,7 +39,7 @@ public class BatchConfiguration {
     public FlatFileItemReader<GiroTransaction> reader() throws UnexpectedInputException, ParseException, Exception {
     	//create FlatFileItemReader
         FlatFileItemReader<GiroTransaction> itemReader = new FlatFileItemReader<GiroTransaction>();
-        itemReader.setResource(new ClassPathResource("1019838471.csv"));
+        itemReader.setResource(new ClassPathResource("import/1019838471.csv"));
         int linesToSkip = 7;
         itemReader.setLinesToSkip(linesToSkip);
         
