@@ -28,7 +28,7 @@ import com.emma.finance.domain.Transaction;
 import antlr.TokenStreamRewriteEngine;
 
 @Configuration
-@EnableBatchProcessing
+//@EnableBatchProcessing
 public class BatchConfiguration {
 
     @Autowired
@@ -45,7 +45,7 @@ public class BatchConfiguration {
     public FlatFileItemReader<GiroTransaction> reader() throws UnexpectedInputException, ParseException, Exception {
     	//create FlatFileItemReader
         FlatFileItemReader<GiroTransaction> itemReader = new FlatFileItemReader<GiroTransaction>();
-        itemReader.setResource(new ClassPathResource("4748________1319.csv"));
+        itemReader.setResource(new ClassPathResource("1019838471.csv"));
         int linesToSkip = 7;
         itemReader.setLinesToSkip(linesToSkip);
         
@@ -60,20 +60,20 @@ public class BatchConfiguration {
         tokenizer.setDelimiter(";");
         tokenizer.setQuoteCharacter(DelimitedLineTokenizer.DEFAULT_QUOTE_CHARACTER);
         
-        
         lineMapper.setLineTokenizer(tokenizer);
-//        lineMapper.setFieldSetMapper(new GiroFieldSetMapper());
+        lineMapper.setFieldSetMapper(new GiroFieldSetMapper());
+        
         itemReader.setLineMapper(lineMapper);
-        itemReader.open(new ExecutionContext());
-        GiroTransaction transaction = itemReader.read();
+//        itemReader.open(new ExecutionContext());
+//        GiroTransaction transaction = itemReader.read();
         
         return itemReader;
     }
 
-//    @Bean
-//    public PersonItemProcessor processor() {
-//        return new PersonItemProcessor();
-//    }
+    @Bean
+    public GiroItemProcessor processor() {
+        return new GiroItemProcessor();
+    }
 
 //    @Bean
 //    public JdbcBatchItemWriter<TransactionStaging> writer() {
@@ -87,8 +87,6 @@ public class BatchConfiguration {
     @Bean
     public JpaItemWriter<GiroTransaction> writer(){
     	
-    	
-    	
 		return null;
     	
     }
@@ -99,7 +97,7 @@ public class BatchConfiguration {
 
     // tag::jobstep[]
     @Bean
-    public Job importUserJob(JobCompletionNotificationListener listener) {
+    public Job importUserJob(JobCompletionNotificationListener listener) throws UnexpectedInputException, ParseException, Exception {
         return jobBuilderFactory.get("importTransactionJob")
                 .incrementer(new RunIdIncrementer())
                 .listener(listener)
@@ -109,11 +107,11 @@ public class BatchConfiguration {
     }
 
     @Bean
-    public Step step1() {
+    public Step step1() throws UnexpectedInputException, ParseException, Exception {
         return stepBuilderFactory.get("step1")
-                .<Transaction, Transaction> chunk(10)
-                .reader(reader())
-                .processor(processor())
+                .<GiroTransaction, GiroTransaction> chunk(10)
+                .reader(this.reader())
+                .processor(this.processor())
                 .writer(writer())
                 .build();
     }

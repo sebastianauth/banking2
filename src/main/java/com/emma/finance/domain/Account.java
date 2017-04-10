@@ -53,4 +53,60 @@ public class Account {
 			return false;
 		return true;
 	}
+
+	/**
+	 * @return the id
+	 */
+	public Integer getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	/**
+	 * @return the accountNumber
+	 */
+	public String getAccountNumber() {
+		return accountNumber;
+	}
+
+	/**
+	 * @param accountNumber the accountNumber to set
+	 */
+	public void setAccountNumber(String accountNumber) {
+		this.accountNumber = accountNumber;
+	}
+
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * @param description the description to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	/**
+	 * @return the accountType
+	 */
+	public AccountType getAccountType() {
+		return accountType;
+	}
+
+	/**
+	 * @param accountType the accountType to set
+	 */
+	public void setAccountType(AccountType accountType) {
+		this.accountType = accountType;
+	}
 }

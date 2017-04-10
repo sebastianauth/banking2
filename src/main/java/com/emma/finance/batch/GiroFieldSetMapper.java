@@ -6,7 +6,7 @@ import org.springframework.validation.BindException;
 
 import com.emma.finance.domain.GiroTransaction;
 
-public class GiroTransactionMapper implements FieldSetMapper<GiroTransaction> {
+public class GiroFieldSetMapper implements FieldSetMapper<GiroTransaction> {
 
 	@Override
 	public GiroTransaction mapFieldSet(FieldSet fs) throws BindException {

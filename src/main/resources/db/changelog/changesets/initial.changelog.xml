@@ -12,7 +12,7 @@
 				<constraints nullable="false" />
 			</column>
 			<column name="account_type" type="integer" remarks="Type: Giro or Credit Card" />
-			<column name="description" type="varchar(200)" remarks="some description" />
+			<column name="description" type="varchar(100)" remarks="some description" />
 		</createTable>
 		<rollback>
 			<dropTable tableName="account" />
@@ -70,6 +70,14 @@
         <rollback>
         	<dropUniqueConstraint tableName="transaction"/>
         </rollback>
+	</changeSet>
+	
+	<changeSet author="sebastian" id="insert_account_data">
+	    <insert tableName="account">
+	        <column name="account_number" type="varchar(100)">DE90120300001019838471</column>
+	        <column name="account_type">1</column>
+			<column name="description" type="varchar(100)">Girokonto Julia und Sebastian</column>
+	    </insert>
 	</changeSet>
 
 </databaseChangeLog>
