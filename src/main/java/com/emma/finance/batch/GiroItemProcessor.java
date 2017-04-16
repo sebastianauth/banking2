@@ -8,6 +8,12 @@ import com.emma.finance.domain.Account;
 import com.emma.finance.domain.AccountType;
 import com.emma.finance.domain.GiroTransaction;
 
+/**
+ * This custom {@code ItemProcessor} adds the account type and writes 
+ * the information of the processed transaction to the log and returns the processed object.
+ *
+ * @author Sebastian
+ */
 public class GiroItemProcessor implements ItemProcessor<GiroTransaction, GiroTransaction> {
 	
 	private static final Logger log = LoggerFactory.getLogger(GiroItemProcessor.class);
@@ -20,7 +26,7 @@ public class GiroItemProcessor implements ItemProcessor<GiroTransaction, GiroTra
 		
 		item.setAccount(account);
 		
-		log.info("Processing: " + item);
+		log.info("Processing transaction information: {}", item);
 		
 		return item;
 	}
