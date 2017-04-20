@@ -24,6 +24,11 @@ public class GiroItemProcessor implements ItemProcessor<GiroTransaction, GiroTra
 		Account account = new Account();
 		account.setAccountType(AccountType.GIRO_KONTO);
 		
+		if(item.getPaymentDetails().length() >= 400) {
+			item.setPaymentDetails(item.getPaymentDetails().substring(0, 390));
+		}
+		
+		
 		item.setAccount(account);
 		
 		log.info("Processing transaction information: {}", item);

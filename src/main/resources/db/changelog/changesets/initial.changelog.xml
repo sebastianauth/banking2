@@ -33,9 +33,9 @@
 			<column name="booking_date" type="date" remarks="Buchungstag, Belegdatum" />
 			<column name="amount" type="numeric(19,2)" remarks="Amount/Betrag" />
 			<column name="original_amount" type="numeric(19,2)" remarks="Urspruenglicher Betrag Foreign currencies" />
-			<column name="payment_details" type="varchar(100)" remarks="Verwendungszweck" />
-			<column name="transaction_type" type="varchar(50)" remarks="Buchungstext" />
-			<column name="recipient_initiator" type="varchar(50)" remarks="Auftraggeber/Beguenstigter" />
+			<column name="payment_details" type="varchar(400)" remarks="Verwendungszweck" />
+			<column name="transaction_type" type="varchar(30)" remarks="Buchungstext" />
+			<column name="recipient_initiator" type="varchar(150)" remarks="Auftraggeber/Beguenstigter" />
 			<column name="account_number" type="varchar(50)" remarks="IBAN, Kontonummer" />
 			<column name="bank_code" type="varchar(50)" remarks="Banking code BLZ" />
 			<column name="creditor_id" type="varchar(50)" remarks="Gläubiger-ID" />

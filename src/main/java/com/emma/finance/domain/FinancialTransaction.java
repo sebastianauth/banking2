@@ -190,7 +190,7 @@ public abstract class FinancialTransaction {
 	 */
 	@Override
 	public String toString() {
-		return "TransactionStaging [id=" + id + ", account=" + account + ", valueDate=" + valueDate + ", bookingDate="
+		return "Transaction [id=" + id + ", account=" + account + ", valueDate=" + valueDate + ", bookingDate="
 				+ bookingDate + ", amount=" + amount + ", paymentDetails=" + paymentDetails + "]";
 	}
 }

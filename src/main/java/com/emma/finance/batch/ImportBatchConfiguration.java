@@ -18,7 +18,6 @@ import org.springframework.batch.item.database.ItemSqlParameterSourceProvider;
 import org.springframework.batch.item.database.JdbcBatchItemWriter;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.LineMapper;
-import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
 import org.springframework.batch.item.file.transform.LineTokenizer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,13 +36,13 @@ public class ImportBatchConfiguration {
 	
 	private static final String PROPERTY_CSV_SOURCE_FILE_PATH = "csv.to.database.job.source.file.path";
 	
-//	private static final String QUERY_INSERT_TA = "INSERT INTO "
-//												+ "		fin_transaction (account_type, account_fk, value_date, booking_date, amount, payment_details, "
-//												+ "			transaction_type, recipient_initiator, account_number, bank_code, mandate, creditor_id, customer) "
-//												+ "VALUES ('GIRO', 1, :valueDate, :bookingDate, :amount, :paymentDetails, :transactionType, "
-//												+ "			:recipientInitiator, :accountNumber, :bankCode, :mandate, :creditorId, :customer)";
+	private static final String QUERY_INSERT_TA = "INSERT INTO "
+												+ "		fin_transaction (account_type, account_fk, value_date, booking_date, amount, payment_details, "
+												+ "			transaction_type, recipient_initiator, account_number, bank_code, mandate, creditor_id, customer) "
+												+ "VALUES ('GIRO', 1, :valueDate, :bookingDate, :amount, :paymentDetails, :transactionType, "
+												+ "			:recipientInitiator, :accountNumber, :bankCode, :mandate, :creditorId, :customer)";
 
-	private static final String QUERY_INSERT_TA = "INSERT INTO fin_transaction (account_type, account_fk, value_date) VALUES ('GIRO', 1, :valueDate)";
+
 	
     @Autowired
     public JobBuilderFactory jobBuilderFactory;
@@ -70,7 +69,7 @@ public class ImportBatchConfiguration {
     }
     
     private LineMapper<GiroTransaction> createTransactionLineMapper() {
-    	DefaultLineMapper<GiroTransaction> lineMapper = new DefaultLineMapper<GiroTransaction>();
+    	LocalizedLineMapper<GiroTransaction> lineMapper = new LocalizedLineMapper<GiroTransaction>();
     	
     	LineTokenizer lineTokenizer = createTransactionLineTokenizer();
     	lineMapper.setLineTokenizer(lineTokenizer);

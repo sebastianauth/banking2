@@ -16,8 +16,8 @@ public class GiroFieldSetMapper implements FieldSetMapper<GiroTransaction> {
 	    }
 		
 		GiroTransaction giroTransaction = new GiroTransaction();
-		giroTransaction.setBookingDate(new java.sql.Date(fs.readDate("Buchungstag", "dd.MM.yyyy").getTime()));
-		giroTransaction.setValueDate(new java.sql.Date(fs.readDate("Wertstellung", "dd.MM.yyyy").getTime()));
+		giroTransaction.setBookingDate(new java.sql.Date(fs.readDate("Buchungstag").getTime()));
+		giroTransaction.setValueDate(new java.sql.Date(fs.readDate("Wertstellung").getTime()));
 		giroTransaction.setTransactionType(fs.readString("Buchungstext"));
 		giroTransaction.setRecipientInitiator(fs.readString("Auftraggeber"));
 		giroTransaction.setPaymentDetails(fs.readString("Verwendungszweck"));
@@ -28,7 +28,7 @@ public class GiroFieldSetMapper implements FieldSetMapper<GiroTransaction> {
 		giroTransaction.setMandate(fs.readString("Mandatsreferenz"));
 		giroTransaction.setCustomer(fs.readString("Kundenreferenz"));
 		
-		return null;
+		return giroTransaction;
 	}
 
 }

@@ -40,7 +40,7 @@ public class ImportController {
     	
     	jobLauncher.run(job, newExecution());
 
-    	log.info("Stopping csvFileToDatabase job");
+    	log.info("End of job: csvFileToDatabase job");
     	
 //    	JobExecution jobExecution = null;
 //        try {
