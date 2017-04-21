@@ -1,5 +1,9 @@
 package com.emma.finance.batch;
 
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
 import javax.sql.DataSource;
 
 import org.springframework.batch.core.Job;
@@ -18,6 +22,8 @@ import org.springframework.batch.item.database.ItemSqlParameterSourceProvider;
 import org.springframework.batch.item.database.JdbcBatchItemWriter;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.LineMapper;
+import org.springframework.batch.item.file.mapping.DefaultLineMapper;
+import org.springframework.batch.item.file.transform.DefaultFieldSetFactory;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
 import org.springframework.batch.item.file.transform.LineTokenizer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,7 +75,7 @@ public class ImportBatchConfiguration {
     }
     
     private LineMapper<GiroTransaction> createTransactionLineMapper() {
-    	LocalizedLineMapper<GiroTransaction> lineMapper = new LocalizedLineMapper<GiroTransaction>();
+    	DefaultLineMapper<GiroTransaction> lineMapper = new DefaultLineMapper<GiroTransaction>();
     	
     	LineTokenizer lineTokenizer = createTransactionLineTokenizer();
     	lineMapper.setLineTokenizer(lineTokenizer);
@@ -83,6 +89,11 @@ public class ImportBatchConfiguration {
     private LineTokenizer createTransactionLineTokenizer() {
     	DelimitedLineTokenizer transactionLineTokenizer = new DelimitedLineTokenizer();
     	
+    	DefaultFieldSetFactory fsf = new DefaultFieldSetFactory();		
+		fsf.setDateFormat(new SimpleDateFormat("dd.MM.yyyy"));
+		fsf.setNumberFormat(NumberFormat.getInstance(Locale.GERMANY));
+		transactionLineTokenizer.setFieldSetFactory(fsf);
+		
     	transactionLineTokenizer.setDelimiter(";");
     	transactionLineTokenizer.setQuoteCharacter(DelimitedLineTokenizer.DEFAULT_QUOTE_CHARACTER);
     	transactionLineTokenizer.setStrict(false);
