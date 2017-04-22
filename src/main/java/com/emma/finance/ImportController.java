@@ -42,16 +42,6 @@ public class ImportController {
 
     	log.info("End of job: csvFileToDatabase job");
     	
-//    	JobExecution jobExecution = null;
-//        try {
-//        	
-//        	JobParameters jobParameters = new JobParametersBuilder().addLong("time",System.currentTimeMillis()).toJobParameters();
-//        	
-//            jobExecution = jobLauncher.run(job, jobParameters);
-//        } catch (Exception e) {
-//        	log.info(e.getMessage());
-//        }
-    	
         return "End"; //"jobExecution's info: Id = " + jobExecution.getId() + " ,status = " + jobExecution.getExitStatus();
     }
     
