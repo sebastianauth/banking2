@@ -1,4 +1,4 @@
-package com.emma.finance;
+package com.emma.finance.web;
 
 import java.util.concurrent.atomic.AtomicLong;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,4 +1,4 @@
-package com.emma.finance;
+package com.emma.finance.web;
 
 public class Greeting {
 	
