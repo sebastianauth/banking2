@@ -14,11 +14,11 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
 
 	private static final Logger log = LoggerFactory.getLogger(JobCompletionNotificationListener.class);
 
-	private final JdbcTemplate jdbcTemplate;
+	//private final JdbcTemplate jdbcTemplate;
 
 	@Autowired
 	public JobCompletionNotificationListener(JdbcTemplate jdbcTemplate) {
-		this.jdbcTemplate = jdbcTemplate;
+//		this.jdbcTemplate = jdbcTemplate;
 	}
 
 	@Override
