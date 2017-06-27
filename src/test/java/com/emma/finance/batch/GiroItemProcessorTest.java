@@ -9,6 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 
 import com.emma.finance.domain.GiroTransaction;
+import com.emma.finance.taimport.job.GiroItemProcessor;
 
 public class GiroItemProcessorTest {
 	
@@ -34,7 +35,7 @@ public class GiroItemProcessorTest {
 	}
 	
     /**
-    * Test method for {@link com.emma.finance.batch.GiroItemProcessor#process(com.emma.finance.domain.GiroTransaction)}.
+    * Test method for {@link com.emma.finance.taimport.job.GiroItemProcessor#process(com.emma.finance.domain.GiroTransaction)}.
     * @throws Exception
     */
     @Test

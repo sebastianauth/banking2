@@ -1,4 +1,4 @@
-package com.emma.finance.batch;
+package com.emma.finance.taimport.job;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

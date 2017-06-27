@@ -1,4 +1,4 @@
-package com.emma.finance.batch;
+package com.emma.finance.taimport.job;
 
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -64,6 +64,7 @@ public class ImportBatchConfiguration {
     public FlatFileItemReader<GiroTransaction> csvFileItemReader(Environment environment) throws UnexpectedInputException, ParseException, Exception {
     	//create FlatFileItemReader
         FlatFileItemReader<GiroTransaction> itemReader = new FlatFileItemReader<GiroTransaction>();
+        //TODO add automatic file processing
         itemReader.setResource(new ClassPathResource(environment.getRequiredProperty(PROPERTY_CSV_SOURCE_FILE_PATH)));
         itemReader.setLinesToSkip(7);
         

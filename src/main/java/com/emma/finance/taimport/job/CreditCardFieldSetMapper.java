@@ -1,4 +1,4 @@
-package com.emma.finance.batch;
+package com.emma.finance.taimport.job;
 
 import org.springframework.batch.item.file.mapping.FieldSetMapper;
 import org.springframework.batch.item.file.transform.FieldSet;
