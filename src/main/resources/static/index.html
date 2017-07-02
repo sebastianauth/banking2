@@ -11,21 +11,23 @@
 </head>
 <body>
 	<h2>Run Import Batch Job</h2>
-	<div class="row" ng-app="BatchTrigger" ng-controller="Batch">
-		<div class="col-md-2">
-			<button class="btn btn-default" type="button" ng-click="triggerBatch()">Run Batch!</button>
-			<p>{{ count }}</p>
+	<div ng-app="BatchTrigger" >
+		<div class="row" ng-controller="Batch">
+			<div class="col-md-2">
+				<button class="btn btn-primary" type="button" ng-click="triggerBatch()">Run Batch</button>
+				<p>{{ count }}</p>
+			</div>
 		</div>
-	</div> 
-	<div class="row" ng-app="demo" ng-controller="Hello">
-		<div class="col-md-2">
-			<input type="text" placeholder="Search..." ng-model="firstname">
-		</div>
-		<div class="col-md-2">
-			<p>The ID is {{greeting.id}}</p>
-		</div>
-		<div class="col-md-2">
-			<p>The content is {{greeting.content}}</p>
+		<div class="row" ng-controller="Hello">
+			<div class="col-md-2">
+				<input type="text" placeholder="Search..." ng-model="firstname">
+			</div>
+			<div class="col-md-2">
+				<p>The ID is {{greeting.id}}</p>
+			</div>
+			<div class="col-md-2">
+				<p>The content is {{greeting.content}}</p>
+			</div>
 		</div>
 	</div>
 	
