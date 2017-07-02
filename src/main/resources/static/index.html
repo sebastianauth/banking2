@@ -1,23 +1,19 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en" ng-app="app" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" ng-app="app" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" ng-app="app" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html lang="en">
-<!--<![endif]-->
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Banking Analyser</title>
+	<title>Banking Analysis</title>
 	<meta name="description" content="">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="/webjars/bootstrap/3.3.6/css/bootstrap.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes"/>
+	<link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.6/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
 </head>
 <body>
 	<h2>Run Import Batch Job</h2>
 	<div class="row" ng-app="BatchTrigger" ng-controller="Batch">
 		<div class="col-md-2">
-			<button ng-click="triggerBatch()">Run Batch!</button>
+			<button class="btn btn-default" type="button" ng-click="triggerBatch()">Run Batch!</button>
 			<p>{{ count }}</p>
 		</div>
 	</div> 
@@ -32,10 +28,14 @@
 			<p>The content is {{greeting.content}}</p>
 		</div>
 	</div>
+	
+	
+	<script src="http://cdn.jsdelivr.net/webjars/angularjs/1.4.9/angular.min.js"
+        th:src="@{/webjars/angularjs/1.4.9/angular.min.js}"></script>
 
-	<script src="/webjars/angularjs/1.4.9/angular.js"></script>
+	<!-- <script src="/webjars/angularjs/1.4.9/angular.js"></script>
 	<script src="/webjars/angularjs/1.4.9/angular-resource.js"></script>
-	<script src="/webjars/angularjs/1.4.9/angular-route.js"></script>
+	<script src="/webjars/angularjs/1.4.9/angular-route.js"></script> -->
 	<script src="/js/hello.js"></script> 
 	<script src="/js/batch.js"></script>
 </body>
