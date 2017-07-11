@@ -10,11 +10,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class FileImportResourceService implements ImportResourceService {
 	
-	private final Path rootLocation;
+//	private final Path rootLocation;
 	
 	@Autowired
     public FileImportResourceService() {
-        this.rootLocation = Paths.get(null);
+//        this.rootLocation = Paths.get(null);
     }
 
 	@Override

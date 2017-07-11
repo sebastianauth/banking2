@@ -6,18 +6,34 @@ import org.springframework.web.multipart.MultipartFile;
 import java.nio.file.Path;
 import java.util.stream.Stream;
 
+/**
+ * @author Sebastian
+ *
+ */
 public interface StorageService {
 
-    void init();
-
+    /**
+     * Stores file in configured location
+     * 
+     * @param file
+     */
     void store(MultipartFile file);
 
+    /**
+     * @return
+     */
     Stream<Path> loadAll();
 
+    /**
+     * @param filename
+     * @return
+     */
     Path load(String filename);
 
+    /**
+     * @param filename
+     * @return
+     */
     Resource loadAsResource(String filename);
-
-    void deleteAll();
 
 }

@@ -1,7 +1,7 @@
 package com.emma.finance.web;
 
-//import hello.storage.StorageFileNotFoundException;
-//import hello.storage.StorageService;
+import com.emma.finance.taimport.upload.StorageFileNotFoundException;
+import com.emma.finance.taimport.upload.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -16,41 +16,41 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.io.IOException;
 import java.util.stream.Collectors;
 
-@Controller
+@RestController
 @RequestMapping(value = "api/upload")
 public class FileUploadController {
 
-//    private final StorageService storageService;
+    private final StorageService storageService;
 
-//    @Autowired
-//    public FileUploadController(StorageService storageService) {
-//        this.storageService = storageService;
-//    }
+    @Autowired
+    public FileUploadController(StorageService storageService) {
+        this.storageService = storageService;
+    }
 
-    @GetMapping("/")
+    @GetMapping("")
     public String listUploadedFiles(Model model) throws IOException {
 
-//        model.addAttribute("files", storageService
-//                .loadAll()
-//                .map(path ->
-//                        MvcUriComponentsBuilder
-//                                .fromMethodName(FileUploadController.class, "serveFile", path.getFileName().toString())
-//                                .build().toString())
-//                .collect(Collectors.toList()));
+        model.addAttribute("files", storageService
+                .loadAll()
+                .map(path ->
+                        MvcUriComponentsBuilder
+                                .fromMethodName(FileUploadController.class, "serveFile", path.getFileName().toString())
+                                .build().toString())
+                .collect(Collectors.toList()));
 
         return "uploadForm";
     }
 
-//    @GetMapping("/files/{filename:.+}")
-//    @ResponseBody
-//    public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
-//
-//        Resource file = storageService.loadAsResource(filename);
-//        return ResponseEntity
-//                .ok()
-//                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\""+file.getFilename()+"\"")
-//                .body(file);
-//    }
+    @GetMapping("/files/{filename:.+}")
+    @ResponseBody
+    public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
+
+        Resource file = storageService.loadAsResource(filename);
+        return ResponseEntity
+                .ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\""+file.getFilename()+"\"")
+                .body(file);
+    }
 
 //    @PostMapping("/")
 //    public String handleFileUpload(@RequestParam("file") MultipartFile file,
