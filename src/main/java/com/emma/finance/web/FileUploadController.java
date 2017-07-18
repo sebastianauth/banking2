@@ -52,7 +52,7 @@ public class FileUploadController {
                 .body(file);
     }
 
-    @PostMapping("/")
+    @PostMapping("")
     public String handleFileUpload(@RequestParam("file") MultipartFile file,
                                    RedirectAttributes redirectAttributes) {
 
@@ -60,7 +60,7 @@ public class FileUploadController {
         redirectAttributes.addFlashAttribute("message",
                 "You successfully uploaded " + file.getOriginalFilename() + "!");
 
-        return "redirect:/";
+        return "redirect:/api/upload";
     }
 
     @ExceptionHandler(StorageFileNotFoundException.class)

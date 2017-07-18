@@ -10,7 +10,7 @@ public class StorageProperties {
     /**
      * Folder location for storing files
      */
-    private String location = "import";
+    private String location = "C:\\Users\\Sebastian\\git\\Banking2\\src\\main\\resources\\import";
 
     public String getLocation() {
         return location;
