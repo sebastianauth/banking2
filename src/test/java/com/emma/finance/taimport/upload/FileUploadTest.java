@@ -46,9 +46,9 @@ public class FileUploadTest {
     public void shouldSaveUploadedFile() throws Exception {
         MockMultipartFile multipartFile =
                 new MockMultipartFile("file", "test.txt", "text/plain", "Spring Framework".getBytes());
-        this.mvc.perform(fileUpload("/").file(multipartFile))
+        this.mvc.perform(fileUpload("/api/upload").file(multipartFile))
                 .andExpect(status().isFound())
-                .andExpect(header().string("Location", "/"));
+                .andExpect(header().string("Location", "/api/upload"));
 
         then(this.storageService).should().store(multipartFile);
     }
@@ -58,7 +58,7 @@ public class FileUploadTest {
         given(this.storageService.loadAsResource("test.txt"))
                 .willThrow(StorageFileNotFoundException.class);
 
-        this.mvc.perform(get("/files/test.txt"))
+        this.mvc.perform(get("/api/upload/files/test.txt"))
                 .andExpect(status().isNotFound());
     }
 

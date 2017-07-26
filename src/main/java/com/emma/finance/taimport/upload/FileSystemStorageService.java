@@ -8,6 +8,8 @@ import java.nio.file.Paths;
 import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
@@ -15,12 +17,20 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class FileSystemStorageService implements StorageService {
-
+	
+	
     private final Path rootLocation;
+    
+    @Value("${import.file.path}")
+    private String importPathProperty;
 
     @Autowired
     public FileSystemStorageService(StorageProperties properties) {
+    	
+//    	this.rootLocation = Paths.get(importPathProperty);
+    	
         this.rootLocation = Paths.get(properties.getLocation());
+//    	this.rootLocation = Paths.get(environment.getRequiredProperty("import.file.path"));
     }
 
     @Override
