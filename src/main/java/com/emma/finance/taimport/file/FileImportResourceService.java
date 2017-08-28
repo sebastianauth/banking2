@@ -23,4 +23,10 @@ public class FileImportResourceService implements ImportResourceService {
 		return null;
 	}
 
+	@Override
+	public void archiveImportResource() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

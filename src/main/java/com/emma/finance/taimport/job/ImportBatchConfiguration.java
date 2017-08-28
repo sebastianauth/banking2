@@ -6,6 +6,8 @@ import java.util.Locale;
 
 import javax.sql.DataSource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -39,6 +41,8 @@ import com.emma.finance.domain.GiroTransaction;
 @Configuration
 @EnableBatchProcessing
 public class ImportBatchConfiguration {
+	
+	private static final Logger log = LoggerFactory.getLogger(ImportBatchConfiguration.class);
 	
 	private static final String PROPERTY_CSV_SOURCE_FILE_PATH = "csv.to.database.job.source.file.path";
 	
@@ -133,22 +137,32 @@ public class ImportBatchConfiguration {
     // tag::jobstep[]
     @Bean
     Step csvFileToDatabaseStep(ItemReader<GiroTransaction> csvFileItemReader, ItemProcessor<GiroTransaction, GiroTransaction> csvFileItemProcessor, ItemWriter<GiroTransaction> csvFileDatabaseItemWriter, StepBuilderFactory stepBuilderFactory) {
-        return stepBuilderFactory.get("csvFileToDatabaseStep")
+    	log.info("csvFileToDatabaseStep was setup");
+    	return stepBuilderFactory.get("csvFileToDatabaseStep")
                 .<GiroTransaction, GiroTransaction>chunk(1)
                 .reader(csvFileItemReader)
                 .processor(csvFileItemProcessor)
                 .writer(csvFileDatabaseItemWriter)
                 .build();
     }
-
+    
     @Bean
-    Job csvFileToDatabaseJob(JobCompletionNotificationListener listener, JobBuilderFactory jobBuilderFactory, @Qualifier("csvFileToDatabaseStep") Step csvTansactionStep) {
+    Step archiveFileStep() {
+    	log.info("archiveFileStep was setup");
+		return null;
+    	
+    }
+    // end::jobstep[]
+    
+    @Bean
+    Job csvFileToDatabaseJob(JobCompletionNotificationListener listener, JobBuilderFactory jobBuilderFactory, @Qualifier("csvFileToDatabaseStep") Step csvTansactionStep, @Qualifier("archiveFileStep") Step archiveFileStep) {
         return jobBuilderFactory.get("csvFileToDatabaseJob")
                 .incrementer(new RunIdIncrementer())
                 .listener(listener)
-                .flow(csvTansactionStep)
-                .end()
+                .start(csvTansactionStep).next(archiveFileStep)
+//                .flow(csvTansactionStep)
+//                .end()
                 .build();
     }
-    // end::jobstep[]
+    
 }

@@ -9,5 +9,9 @@ import org.springframework.core.io.ClassPathResource;
 public interface ImportResourceService {
 	
 	ClassPathResource getImportResource();
+	
+	void archiveImportResource();
+	
+//	List<Resource> readImportFolder();
 
 }
