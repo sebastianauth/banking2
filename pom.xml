@@ -12,20 +12,24 @@
 		<version>1.5.4.RELEASE</version>
 	</parent>
 
+	<properties>
+		<java.version>1.8</java.version>
+	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
 		<!-- Batch -->
 		<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-batch</artifactId>
-        </dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-batch</artifactId>
+		</dependency>
 		<!-- Data Access -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -73,10 +77,6 @@
 		</dependency>
 	</dependencies>
 
-	<properties>
-		<java.version>1.8</java.version>
-	</properties>
-
 	<build>
 		<plugins>
 			<plugin>
@@ -84,7 +84,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
-		<finalName>Banking2</finalName>
+		<finalName>banking2-${project.version}</finalName>
 	</build>
 
 	<repositories>
